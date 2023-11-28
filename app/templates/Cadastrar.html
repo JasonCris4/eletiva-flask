@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title title-primary">bem-vindo, amigo!</h2>
+                <p class="description description-primary">Insira seus dados pessoais</p>
+                <p class="description description-primary">e comece sua jornada conosco</p>
+                <a id="signup" href="/login" class="btn btn-primary">Logar</a>
+            </div>
+            <div class="second-column">
+
+                <p class="description description-second">Cadastar</p>
+                <form class="form" action="/criar-conta" method="POST">
+                
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input name="nome" type="text" placeholder="Nome">
+                    </label>
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input name="email" type="email" placeholder="Email">
+                    </label>
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input name="telefone" type="number" placeholder="Telefone">
+                    </label>
+               
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input name="senha" type="password" placeholder="Senha">
+                    </label>
+                    <button type="submit" class="btn btn-second">Cadastrar</button>
+                </form>
+            </div><!-- second column -->
+        </div><!-- second-content -->
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
