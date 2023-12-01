@@ -7,10 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studio Hair</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
-
-    <!-- icon -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <!-- estilo css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
@@ -22,7 +19,9 @@
             </div>
             <div class="nav" id="nav">
                 <ul class="nav__menu">
-                    <li class="nav__item"><a href="#" class="nav__link active-link">home</a></li>
+                    {% if usuario %}
+                    <li class="nav__item"><a href="/ADMIN" class="nav__link">Admin</a></li>
+                    {% endif %}
                     <li class="nav__item"><a href="#about" class="nav__link">quem somos</a></li>
                     <li class="nav__item"><a href="#services" class="nav__link">serviços</a></li>
                     <li class="nav__item"><a href="#package" class="nav__link">pacotes</a></li>
@@ -61,7 +60,7 @@
                     <div class="about__detail">
                         <div class="about__detail__content">
                             <div class="about__img">
-                                <img src="assests/img/about-img.jpg" alt="">
+                                <img src="{{ url_for('static', filename='/img/about-img.jpg') }}" alt="">
                             </div>
                             <div class="about__descripion">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -88,49 +87,49 @@
                 <div class="services__content__descripion grid container">
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/manicure.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/manicure.png') }}" alt="Manicure">
                             <p>manicure</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/pedicure.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/pedicure.png') }}" alt="">
                             <p>pedicure</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/maquiagem.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/maquiagem.png') }}" alt="">
                             <p>maquiagem</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/pentado.png" alt="">
+                            <img src= "{{ url_for('static', filename='img/servicos/pentado.png') }}" alt="">
                             <p>penteado</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/corte.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/corte.png') }}" alt="">
                             <p>corte de cabelo</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/sobrancelha.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/sobrancelha.png') }}" alt="">
                             <p>design de sobrancelha</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/depilacao.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/depilacao.png') }}" alt="">
                             <p>depiliação com cera</p>
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner">
-                            <img src="assests/img/servicos/limpeza.png" alt="">
+                            <img src="{{ url_for('static', filename='img/servicos/limpeza.png') }}" alt="">
                             <p>limpeza de pele</p>
                         </div>
                     </div>
@@ -322,28 +321,28 @@
                 </div>
                 <div class="gallery__list__img row container">
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto1.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto1.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto2.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto2.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto3.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto3.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto4.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto4.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto5.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto5.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto6.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto6.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto7.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto7.png') }}" alt="">
                     </div>
                     <div class="gallery__img">
-                        <img src="assests/img/img-insta/foto8.png" alt="">
+                        <img src="{{ url_for('static', filename='img/img-insta/foto8.png') }}" alt="">
                     </div>
                 </div>
                 <button class="btn">ver mais</button>
@@ -360,7 +359,7 @@
                 <div class="testimonials__card container grid">
                     <div class="testimonials__item flex">
                         <div class="testimonials__img">
-                            <img src="assests/img/depoimentos/depoimento-1.png" alt="">
+                            <img src="{{ url_for('static', filename='img/depoimentos/depoimento-1.png') }}" alt="">
                         </div>
                         <div class="testimonials__box">
                             <div class="testimonials__name">
@@ -379,7 +378,7 @@
                     </div>
                     <div class="testimonials__item flex">
                         <div class="testimonials__img">
-                            <img src="assests/img/depoimentos/depoimento-2.png" alt="">
+                            <img src="{{ url_for('static', filename='img/depoimentos/depoimento-2.png') }}" alt="">
                         </div>
                         <div class="testimonials__box">
                             <div class="testimonials__name">
@@ -398,7 +397,7 @@
                     </div>
                     <div class="testimonials__item flex">
                         <div class="testimonials__img">
-                            <img src="assests/img/depoimentos/depoimento-1.png" alt="">
+                            <img src="{{ url_for('static', filename='img/depoimentos/depoimento-1.png') }}" alt="">
                         </div>
                         <div class="testimonials__box">
                             <div class="testimonials__name">
@@ -417,7 +416,7 @@
                     </div>
                     <div class="testimonials__item flex">
                         <div class="testimonials__img">
-                            <img src="assests/img/depoimentos/depoimento-2.png" alt="">
+                            <img src="{{ url_for('static', filename='img/depoimentos/depoimento-2.png') }}" alt="">
                         </div>
                         <div class="testimonials__box">
                             <div class="testimonials__name">
@@ -441,7 +440,7 @@
     <footer class="footer" id="contact">
         <div class="footer__list section container grid">
             <div class="footer__data">
-                <h1><a href="#"><img src="assests/img/logo.svg" alt=""></a></h1>
+                <h1><a href="#"><img src="{{ url_for('static', filename='img/logo.svg') }}" alt=""></a></h1>
                 <div class="footer__data-social">
                     <a href=""><i class='bx bxl-facebook social__icon'></i></a>
                     <a href=""><i class='bx bxl-instagram social__icon' ></i></a>

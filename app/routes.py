@@ -8,6 +8,11 @@ from app.models.modelos import Usuario
 
 bcrypt = Bcrypt(app)
 
+@app.route("/")
+def index():
+    return redirect(url_for('login_Usuarios'))
+
+#-------------------------LOGIN USUARIOS -------------------------------
 @app.route("/login", methods=['GET', 'POST'])
 def login_Usuarios():
     if request.method == 'POST':
@@ -41,7 +46,7 @@ def criar_conta():
         novo_usuario = Usuario(nome=nome, email=email, is_UserMaster = False, senha=senhaHash, telefone=telefone)
         db.session.add(novo_usuario)
         db.session.commit()
-        return redirect('/login', info= 'Sucesso ao cadastar')
+        return render_template('login.html', info= 'Sucesso ao cadastar')
     else:
         return render_template('cadastrar.html')
 
@@ -54,7 +59,7 @@ def sair():
 @login_required
 def home():
     if current_user.is_authenticated:
-        return render_template('index.html')
+        return render_template('index.html', usuario = current_user.is_UserMaster)
     else:
         return redirect(url_for('login_Usuarios'))
 
@@ -76,7 +81,7 @@ def get_Usuarios():
 
         })
 
-    return jsonify(lista_Usuarios)
+    return render_template('admin.html', usuarios= lista_Usuarios)
 
 @app.route("/ADM", methods=['POST'])
 def create_Usuario():
@@ -90,7 +95,7 @@ def create_Usuario():
     db.session.add(Usuario)
     db.session.commit()
 
-    return jsonify({'status': 201, 'message': 'Usuario criado com sucesso', 'data': usuario.id}), 201
+    return render_template('admin.html', usuarios= usuario)
 
 
 @app.route("/Usuarios/<int:Usuario_id>", methods=['PUT'])
@@ -126,6 +131,32 @@ def delete_Usuario(Usuario_id):
     return jsonify({'status': 200, 'message': 'Usuario deletado com sucesso'}), 200
 
 
+
+
+#@app.route('/ADMIN', methods=['GET', 'POST'])
+#@login_required  # Supondo que você tenha um sistema de login
+#def admin_panel():
+    if current_user.is_authenticated and current_user.is_admin:  # Verificação do usuário administrador
+        if request.method == 'POST':
+            if request.form['_method'] == 'DELETE':
+                user_id = int(request.form['user_id'])
+                user_to_delete = Usuario.query.get_or_404(user_id)
+                db.session.delete(user_to_delete)
+                db.session.commit()
+                return redirect(url_for('admin_panel'))
+
+            elif request.form['_method'] == 'PUT':
+                user_id = int(request.form['user_id'])
+                user_to_update = Usuario.query.get_or_404(user_id)
+                new_username = request.form['new_username']
+                user_to_update.nome = new_username  # Ajustar para o campo correto
+                db.session.commit()
+                return redirect(url_for('admin_panel'))
+
+        usuarios = Usuario.query.all()
+        return render_template('admin.html', usuarios=usuarios)
+    else:
+        return redirect(url_for('login_Usuarios'))
 
 
 
