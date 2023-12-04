@@ -83,40 +83,40 @@ def get_Usuarios():
 
     return render_template('admin.html', usuarios= lista_Usuarios)
 
-@app.route("/ADM", methods=['POST'])
-def create_Usuario():
-    dados = request.json
-    _nome = dados["nome"]
-    _email = dados["email"]
-    _senha = dados["senha"]
-    _telefone = dados["telefone"]
 
-    usuario = Usuario(nome=_nome, senha=_senha, email=_email, telefone=_telefone)
-    db.session.add(Usuario)
+@app.route("/editar-usuario/<int:user_id>", methods=['GET', 'POST'])
+@login_required
+def editar_usuario(user_id):
+    usuario = Usuario.query.get(user_id)
+
+    if request.method == 'POST':
+        # Atualizar informações do usuário com base nos dados do formulário
+        usuario.nome = request.form['nome']
+        usuario.telefone = request.form['telefone']
+        usuario.email = request.form['email']
+        
+        # Verifique se a senha foi alterada antes de gerar o hash novamente
+        if request.form['senha']:
+            senha_hash = bcrypt.generate_password_hash(request.form['senha']).decode('utf-8')
+            usuario.senha = senha_hash
+        
+        # Salvar no banco de dados
+        db.session.commit()
+
+        return redirect(url_for('get_Usuarios'))
+
+    return render_template('atualizar.html', usuario=usuario)
+
+
+@app.route("/remover-usuario/<int:user_id>", methods=['GET'])
+@login_required
+def remover_usuario(user_id):
+    usuario = Usuario.query.get(user_id)
+    
+    db.session.delete(usuario)
     db.session.commit()
 
-    return render_template('admin.html', usuarios= usuario)
-
-
-@app.route("/Usuarios/<int:Usuario_id>", methods=['PUT'])
-def update_Usuario(Usuario_id):
-    
-    usuario = Usuario.query.get(Usuario_id)
-    if not usuario:
-        return jsonify({'status': 404, 'message': 'Usuario não encontrado'}), 404
-    
-    dados = request.json
-
-   
-    usuario.nome = dados.get("nome", usuario.nome)
-    usuario.senha = dados.get("senha", usuario.senha)
-    usuario.email = dados.get("email", usuario.email)
-    usuario.telefone = dados.get("telefone", usuario.telefone)
-
-
-    db.session.commit()
-
-    return jsonify({'status': 200, 'message': 'Usuario atualizado com sucesso'}), 200
+    return redirect(url_for('get_Usuarios'))
 
 
 # Remover Usuario
